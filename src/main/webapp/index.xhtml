@@ -19,27 +19,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="id">ID </label>
-                                        <p:inputText id="id" styleClass="form-control" placeholder="Enter your ID"></p:inputText>
+                                        <p:inputText id="id" value="#{reg.id}" styleClass="form-control" placeholder="Enter your ID"></p:inputText>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="username">Username: </label>
-                                        <p:inputText id="username" styleClass="form-control" placeholder="username"></p:inputText>
+                                        <p:inputText id="username" value="#{reg.name}" styleClass="form-control" placeholder="username"></p:inputText>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="username">Password: </label>
-                                <p:inputText id="password" styleClass="form-control" placeholder="password"></p:inputText>
+                                <p:inputText id="password" value="#{reg.password}" styleClass="form-control" placeholder="password"></p:inputText>
                             </div>
                             <div class="form-group">
                                 <label for="caontactno">Contact no: </label>
-                                <p:inputText id="caontactno" styleClass="form-control" placeholder="Contact no"></p:inputText>
+                                <p:inputText id="caontactno"  value="#{reg.contact}" styleClass="form-control" placeholder="Contact no"></p:inputText>
                             </div>
                             <div class="form-group">
                                 <label for="course">Course: </label>
-                                <p:selectOneMenu id="course" style="width: 100%">
+                                <p:selectOneMenu id="course" value="#{reg.course}" style="width: 100%">
                                     <f:selectItem itemValue="JAVA" itemLabel="JAVA"/>
                                     <f:selectItem itemValue="C#" itemLabel="C#"/>
                                     <f:selectItem itemValue="PHP" itemLabel="PHP"/>
@@ -48,14 +48,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="gender">Gender: </label>
-                                <p:selectOneRadio id="gender">
+                                <p:selectOneRadio id="gender" value="#{reg.gender}">
                                     <f:selectItem itemValue="Male" itemLabel="Male"/>
                                     <f:selectItem itemValue="Fem" itemLabel="Female"/>
                                 </p:selectOneRadio>
                             </div>
                             <div class="form-group">
                                 <label for="skil">Skill: </label>
-                                <p:selectManyCheckbox id="skill">
+                                <p:selectManyCheckbox id="skill" value="#{reg.skill}">
                                     <f:selectItem itemValue="HTML" itemLabel="HTML" />
                                     <f:selectItem itemValue="CSS" itemLabel="CSS" />
                                 </p:selectManyCheckbox>
@@ -66,24 +66,25 @@
                                         <label for="address">Address: </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <p:inputTextarea id="address" style="width: 100%" />
+                                        <p:inputTextarea id="address" value="#{reg.address}" style="width: 100%" />
                                     </div>
                                 </div>
                             </div>
-                            <p:commandButton styleClass="btn btn-primary" value="submit"></p:commandButton>
+                            <p:commandButton styleClass="btn btn-primary" value="submit" action="#{reg.stoge()}"></p:commandButton>
                         </h:form>
                     </fieldset>
                 </div>
             </div>
             <div class="row">
-                <table class="table table-dark">
-                    <thead>
+                <table class="table">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Gender</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Mobile</th>                            
                             <th scope="col">Course</th>
+                            <th scope="col">Gender</th>
                             <th scope="col">Skill</th>
                             <th scope="col">Address</th>
                             <th scope="col">Action</th>
