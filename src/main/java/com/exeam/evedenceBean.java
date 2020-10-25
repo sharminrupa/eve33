@@ -1,5 +1,6 @@
 package com.exeam;
 
+import static com.sun.faces.facelets.util.Path.context;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+
 @ManagedBean(name="reg", eager = true)
 @SessionScoped
 
@@ -26,6 +28,8 @@ public class evedenceBean {
     private String gender;
     private String[] skill;
     private String address;
+    private String message;
+    private boolean update;
     private List<evedenceBean> registation;
     private static Connection conn = null;
     private PreparedStatement pst = null;
@@ -67,7 +71,8 @@ public class evedenceBean {
         return null;
     }
     
-     public List<evedenceBean> getShowData() {  
+     public List<evedenceBean> getShowData() { 
+         
         init();
         try {
             String sql = "select * from registation";
@@ -75,14 +80,25 @@ public class evedenceBean {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 evedenceBean r = new evedenceBean();
-                r.setId(rs.getInt("id"));
-                r.setPassword(rs.getString("password"));
-                r.setContact(rs.getString("contact"));
-                r.setCourse(rs.getString("course"));
-                r.setGender(rs.getString("gender"));
-               // r.setSkill(rs.getString("skill"));
-                r.setAddress(rs.getString("address"));
-                registation.add(r);                
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                String contact = rs.getString("contact");
+                String course = rs.getString("course");
+                String gender = rs.getString("gender");
+                String skill = rs.getString("skill");
+                String address = rs.getString("address");                
+                
+                r.setId(id);
+                r.setName(name);
+                r.setPassword(password);
+                r.setContact(contact);
+                r.setCourse(course);
+                r.setGender(gender);
+                r.setSkill(skill.split(","));
+                r.setAddress(address);                
+                registation.add(r);       
+                
             }
 
         } catch (SQLException ex) {
@@ -91,6 +107,15 @@ public class evedenceBean {
         return registation;
     }
 
+     public String edit(){
+         try {
+             conn = DBAccess.getConn();
+             
+         } catch (Exception e) {
+         }
+        return "/index.xhtml";
+     }
+     
     public int getId() {
         return id;
     }
@@ -158,6 +183,16 @@ public class evedenceBean {
         this.address = address;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    
+    
     public List<evedenceBean> getRegistation() {
         return registation;
     }

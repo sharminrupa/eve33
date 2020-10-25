@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous"/>
@@ -15,6 +16,7 @@
                 <div class="col-md-6">
                     <fieldset>
                         <h:form>
+                            <p:growl id="growl" showDetail="true" sticky="true" />
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -91,20 +93,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row"></td>
-                            <td scope="row">
-                                <p:commandLink styleClass="btn btn-success fa fa-pencil mr-2"></p:commandLink>                                
-                                <p:commandLink styleClass="btn btn-danger fa fa-trash-o"></p:commandLink>                                
-                                
-                            </td>
-                        </tr>
+                        <c:forEach var="ul" items="${reg.showData}">
+                            <tr>
+                                <td scope="row">${ul.id}</td>
+                                <td scope="row">${ul.name}</td>
+                                <td scope="row">${ul.password}</td>
+                                <td scope="row">${ul.contact}</td>
+                                <td scope="row">${ul.course}</td>
+                                <td scope="row">${ul.gender}</td>
+                                <td scope="row">${ul.skill}</td>
+                                <td scope="row">${ul.address}</td>
+                                <td scope="row">
+                                    <h:form>
+                                        <p:commandLink styleClass="btn btn-success fa fa-pencil mr-2" action="${reg.edit(ul.id)}"></p:commandLink>                                
+                                        <p:commandLink styleClass="btn btn-danger fa fa-trash-o"></p:commandLink>                                
+
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
